@@ -1,27 +1,31 @@
-import { Navigate, Route, Routes } from "react-router-dom"
-import { Landing } from "../pages/Landing"
-import { Dashboard } from "../pages/Dashboard"
-import { Login } from "../pages/Login"
-import { Register } from "../pages/Register"
-
+import { Navigate, Route, Routes } from "react-router-dom";
+import { Landing } from "../pages/Landing";
+import { Dashboard } from "../pages/Dashboard";
+import { Login } from "../pages/Login";
+import { Register } from "../pages/Register";
+import { PrivateRoute } from "./PrivateRoute";
+import { PublicRoute } from "./PublicRoute";
 
 export const Navigation = () => {
   return (
-      <div className='main-layout'>
+    <div className="main-layout">
+      <Routes>
+        {/* Rutas públicas (solo si no está logueado) */}
+        <Route element={<PublicRoute />}>
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
 
-        <Routes>
-            <Route path='landing' element={<Landing/>}/>
-            <Route path='dashboard' element={<Dashboard/>}/>
-            <Route path='register' element={<Register/>}/>
-            <Route path='login' element={<Login/>}/>
+        {/* Rutas privadas (requieren login) */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
 
-            <Route path='/*' element={<Navigate to="/landing" replace/>}/>
-        </Routes>
-
-        
-      </div>
-    
-  )
-}
-
+        {/* Ruta por defecto */}
+        <Route path="/*" element={<Navigate to="/landing" replace />} />
+      </Routes>
+    </div>
+  );
+};
 
