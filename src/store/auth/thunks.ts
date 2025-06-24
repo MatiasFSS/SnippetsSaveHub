@@ -1,5 +1,6 @@
 import { loginWithEmailPassword, signInWithGoogle, registerUserWithEmailPassword, logoutFirebase } from "../../firebase/providers";
 import type { LoginFormData, RegisterFormData } from "../../interface/interface";
+import { clearSnippetAuth } from "../snippets/snippetsSlice";
 import type { AppDispatch } from "../store";
 import { checkingCredentials, login, logout } from "./authSlice";
 
@@ -62,6 +63,7 @@ export const startLogout = () => {
     return async (dispatch: AppDispatch) => {
         
         await logoutFirebase() 
+        dispatch(clearSnippetAuth())
         dispatch(logout({}))
 
 

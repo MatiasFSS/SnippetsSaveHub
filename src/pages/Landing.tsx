@@ -2,11 +2,11 @@ import { Link } from "react-router-dom"
 
 export const Landing = () => {
   return (
-   <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-neutral-800 to-neutral-900 px-6 py-12">
-    <div className="flex flex-col md:flex-row items-center gap-12 max-w-6xl w-full">
+   <div className="flex flex-1 items-center justify-center h-full bg-gradient-to-br from-neutral-800 to-neutral-900 px-6 py-12">
+  <div className="flex flex-col md:flex-row items-center gap-12 max-w-6xl w-full h-full">
       
-      <div className="md:w-1/2 w-full">
-        <div className="bg-neutral-700 rounded-2xl shadow-2xl p-8 text-amber-50">
+       <div className="md:w-1/2 w-full">
+      <div className="bg-neutral-700 rounded-2xl shadow-2xl p-8 text-amber-50">
           <h1 className="text-4xl font-bold mb-4 leading-tight">
             Bienvenido a la Gestión de Snippets
           </h1>

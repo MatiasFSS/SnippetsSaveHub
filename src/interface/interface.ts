@@ -9,3 +9,11 @@ export interface RegisterFormData {
   username: string;
   confirmPassword: string;
 }
+
+export interface Data {
+  id?: string;
+  title: string;
+  tech: string;
+  code: string;
+  date: string;
+}

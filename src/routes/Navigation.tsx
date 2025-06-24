@@ -8,7 +8,7 @@ import { PublicRoute } from "./PublicRoute";
 
 export const Navigation = () => {
   return (
-    <div className="main-layout">
+    <div className="main-layout h-full">
       <Routes>
         {/* Rutas públicas (solo si no está logueado) */}
         <Route element={<PublicRoute />}>

@@ -4,10 +4,12 @@ import { Navigation } from "./routes/Navigation"
 
 export const Snippets = () => {
   return (
-    <>
-      <NavBar/>
-      <Navigation/>
-    </>
+    <div className="h-screen flex flex-col">
+      <NavBar />
+      <main className="flex-grow overflow-auto">
+        <Navigation />
+      </main>
+    </div>
   )
 }
 
