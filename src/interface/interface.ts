@@ -14,6 +14,7 @@ export interface Data {
   id?: string;
   title: string;
   tech: string;
+  desc: string;
   code: string;
   date: string;
 }

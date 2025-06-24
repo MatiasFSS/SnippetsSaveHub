@@ -5,6 +5,7 @@ import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
+import { SnippetView } from "../pages/SnippetView";
 
 export const Navigation = () => {
   return (
@@ -20,6 +21,7 @@ export const Navigation = () => {
         {/* Rutas privadas (requieren login) */}
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/snippets" element={<SnippetView />} />
         </Route>
 
         {/* Ruta por defecto */}

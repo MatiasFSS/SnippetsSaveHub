@@ -25,7 +25,7 @@ export const NavBar = () => {
           {/* Botón de Logout solo si está autenticado */}
           {status === "authenticated" && (
             <>
-              <span className="text-sm text-amber-200">{displayName}</span>
+              <span className="text-sm text-violet-400">{displayName}</span>
               <button
                 onClick={handleLogout}
                 className="bg-violet-500 hover:bg-violet-600 px-3 py-1 rounded-lg text-sm transition"

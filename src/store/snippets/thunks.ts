@@ -16,6 +16,7 @@ export const newSnippet = () => {
       title: "",
       tech: "",
       code: "",
+      desc: "",
       date: new Date().toISOString(), // date como string ISO
     };
 
