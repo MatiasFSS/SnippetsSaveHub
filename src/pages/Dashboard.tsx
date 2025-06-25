@@ -29,7 +29,7 @@ export const Dashboard = () => {
     .slice(0, 8);
 
   return (
-    <div className="h-full text-white p-4 bg-gradient-to-br from-neutral-800 to-neutral-900">
+    <div className="h-full text-white p-3 bg-gradient-to-br from-neutral-800 to-neutral-900">
       <div className="flex flex-col lg:flex-row p-2">
         <div className="w-full lg:w-1/2">
           <div className="w-full p-4">
@@ -66,7 +66,7 @@ export const Dashboard = () => {
                   <h3 className="font-bold text-lg truncate">
                     {snip.title || "(Sin título)"}
                   </h3>
-                  <p className="text-sm text-gray-300 truncate">{`Descripción: ${snip.desc}`}</p>
+                  <p className="text-sm text-gray-300 truncate">{snip.desc}</p>
                   <p className="text-sm text-gray-300 truncate font-semibold">{snip.tech}</p>
                   <p className="text-xs text-gray-400 mb-1">
                     {new Date(snip.date).toLocaleDateString()}
@@ -87,7 +87,7 @@ export const Dashboard = () => {
         </div>
         
         {active ? (
-          <div className="w-full lg:w-1/2">
+          <div className="w-full lg:w-1/2 flex justify-center items-center">
             <SnippetEditor
               active={active}
               onSave={handleSave}

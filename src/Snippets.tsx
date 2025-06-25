@@ -6,9 +6,8 @@ export const Snippets = () => {
   return (
     <div className="h-screen flex flex-col">
       <NavBar />
-      <main className="flex-grow overflow-auto">
-        <Navigation />
-      </main>
+      <Navigation />
+     
     </div>
   )
 }

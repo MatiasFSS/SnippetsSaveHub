@@ -1,5 +1,6 @@
-import type { Data } from "../interface/interface";
+import { toast } from "react-toastify";
 import MonacoEditor from "@monaco-editor/react";
+import type { Data } from "../interface/interface";
 
 interface Props {
   active: Data;
@@ -9,25 +10,29 @@ interface Props {
 }
 
 const technologies = [
-  "JavaScript",
-  "TypeScript",
-  "JSON",
-  "CSS",
-  "HTML",
-  "XML",
-  "Markdown",
-  "SQL",
-  "C#",
-  "C++",
-  "Java",
-  "Python",
-  "PHP",
-  "PowerShell",
-  "Ruby",
-  "Shell",
+  "JavaScript", "TypeScript", "JSON", "CSS", "HTML", "XML",
+  "Markdown", "SQL", "C#", "C++", "Java", "Python", "PHP", "Ruby",
 ];
 
 export const SnippetEditor = ({ active, onSave, onDelete, onUpdate }: Props) => {
+  const handleSaveClick = () => {
+  const { title, tech, code } = active;
+
+  const errores: string[] = [];
+
+  if (!title.trim()) errores.push("El título es obligatorio.");
+  if (!tech.trim()) errores.push("La tecnología es obligatoria.");
+  if (!code.trim()) errores.push("El código es obligatorio.");
+
+  if (errores.length > 0) {
+    errores.forEach(err => toast.error(err));
+    return;
+  }
+
+  onSave();
+  toast.success("Snippet guardado exitosamente");
+};
+
   return (
     <div className="w-full h-full">
       <div className="bg-neutral-800 border border-neutral-700 rounded-2xl shadow-xl p-6 flex flex-col gap-4 h-full">
@@ -63,7 +68,7 @@ export const SnippetEditor = ({ active, onSave, onDelete, onUpdate }: Props) => 
         <div className="flex-grow overflow-hidden rounded-lg border border-neutral-700">
           <MonacoEditor
             height="450px"
-            defaultLanguage="javascript"
+            language={active.tech.toLowerCase() || "javascript"}
             value={active.code}
             onChange={(value) => onUpdate({ ...active, code: value || "" })}
             theme="vs-dark"
@@ -78,7 +83,7 @@ export const SnippetEditor = ({ active, onSave, onDelete, onUpdate }: Props) => 
 
         <div className="mt-4 flex flex-col sm:flex-row gap-4 justify-end">
           <button
-            onClick={onSave}
+            onClick={handleSaveClick}
             className="w-full sm:w-auto bg-violet-500 hover:bg-violet-600 active:bg-violet-700 transition px-6 py-3 rounded-lg text-white font-semibold"
           >
             Guardar

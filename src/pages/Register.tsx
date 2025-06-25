@@ -37,7 +37,7 @@ export const Register = () => {
  
   return (
     <>
-     <div className="flex items-center justify-center h-full bg-gradient-to-br from-neutral-800 to-neutral-900 px-4">
+     <div className="h-full bg-gradient-to-br from-neutral-800 to-neutral-900 px-4 flex flex-1 items-center justify-center">
         <div className="w-full max-w-md bg-neutral-700 rounded-2xl shadow-xl p-6 sm:p-8 text-amber-50">
           <h1 className="text-3xl font-bold text-center mb-2">Crea tu cuenta</h1>
           <p className="text-center text-sm font-light mb-6">Completa el siguiente formulario para registrarte.</p>

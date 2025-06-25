@@ -6,31 +6,22 @@ import { loadSnippets } from '../../helpers/loadSnippet';
 
 
 export const newSnippet = () => {
-    return async (dispatch: AppDispatch, getState: () => RootState) => {
+  return async (dispatch: AppDispatch) => {
     dispatch(savingSnippet());
 
-    const { uid } = getState().auth;
-
-    // Aquí creamos el objeto sin id ni date con tipo number
+    // Snippet vacío sin id aún
     const newSnippet = {
+      id: '', // necesario para que el slice lo acepte
       title: "",
       tech: "",
       code: "",
       desc: "",
-      date: new Date().toISOString(), // date como string ISO
+      date: new Date().toISOString(),
     };
 
-    const newDoc = doc(collection(FirebaseDB, `users/${uid}/snippets`));
-    await setDoc(newDoc, newSnippet);
-
-    // Agregamos el id generado por Firestore al objeto
-    const snippetWithId = { ...newSnippet, id: newDoc.id };
-
-    dispatch(addNewSnippet(snippetWithId));
-    dispatch(activeSnippet(snippetWithId));
+    dispatch(activeSnippet(newSnippet));
   };
-
-}
+};
 
 export const startLoadingSnippet = () => {
     return async (dispatch: AppDispatch, getState: () => RootState) => {
@@ -48,19 +39,29 @@ export const startSaveSnippet = () => {
     const { uid } = getState().auth;
     const { active: snippet } = getState().snippet;
 
-    if (!snippet || !snippet.id) {
-      throw new Error("No hay snippet activo para guardar");
+    if (!snippet) throw new Error("No hay snippet activo");
+
+    const snippetToFirestore = { ...snippet };
+    delete snippetToFirestore.id;
+
+    // Si no tiene id, es un nuevo snippet
+    if (!snippet.id) {
+      const newDoc = doc(collection(FirebaseDB, `users/${uid}/snippets`));
+      await setDoc(newDoc, snippetToFirestore);
+      const snippetWithId = { ...snippet, id: newDoc.id };
+
+      dispatch(addNewSnippet(snippetWithId));
+      dispatch(activeSnippet(snippetWithId));
+      return;
     }
 
-    const snippetToFireStore = { ...snippet };
-    delete snippetToFireStore.id; // Para no guardar el id dentro del documento
-
+    // Si ya tiene id, actualizar
     const docRef = doc(FirebaseDB, `users/${uid}/snippets/${snippet.id}`);
-    await setDoc(docRef, snippetToFireStore, { merge: true });
+    await setDoc(docRef, snippetToFirestore, { merge: true });
 
-    dispatch(updateSnippet(snippet));
+    dispatch(updateSnippet({ ...snippet }));
   };
-}
+};
 
 export const startDeletingSnippet = () => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {

@@ -17,6 +17,7 @@ export const loadSnippets = async (uid = ""): Promise<Data[]> => {
       title: data.title ?? '',
       tech: data.tech ?? '',
       code: data.code ?? '',
+      desc: data.desc ?? '',
       date: data.date ?? '',
     });
   });

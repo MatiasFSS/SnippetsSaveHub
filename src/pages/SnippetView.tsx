@@ -6,7 +6,23 @@ import { startLoadingSnippet, startSaveSnippet, startDeletingSnippet } from "../
 import { activeSnippet } from "../store/snippets/snippetsSlice";
 import type { Data } from "../interface/interface";
 
-const technologies = ["Todos", "JavaScript", "Python", "Java", "TypeScript"];
+const technologies = [
+  "Todos",
+  "JavaScript",
+  "TypeScript",
+  "JSON",
+  "CSS",
+  "HTML",
+  "XML",
+  "Markdown",
+  "SQL",
+  "C#",
+  "C++",
+  "Java",
+  "Python",
+  "PHP",
+  "Ruby",
+];
 
 export const SnippetView = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -60,7 +76,7 @@ export const SnippetView = () => {
       </h1>
 
       <select
-        className="mb-6 p-2 bg-neutral-700 border border-neutral-700 rounded text-white"
+        className="mb-6 p-2  bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-violet-500 rounded text-white"
         value={selectedTech}
         onChange={(e) => setSelectedTech(e.target.value)}
       >
@@ -73,7 +89,7 @@ export const SnippetView = () => {
         {filtered.map((snip) => (
           <div
             key={snip.id}
-            className="bg-neutral-700 rounded-xl p-4 shadow hover:bg-violet-700 transition cursor-pointer"
+            className="bg-neutral-700 p-6 rounded-lg hover:bg-violet-700 transition cursor-pointer"
             onClick={() => openModal(snip)}
           >
             <h2 className="text-xl font-semibold">{snip.title || "(Sin título)"}</h2>
@@ -87,27 +103,26 @@ export const SnippetView = () => {
       </div>
 
       {isModalOpen && selectedSnippet && (
-  <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
-    
-    <div className="relative bg-neutral-800 rounded-2xl shadow-2xl w-full max-w-2xl h-[88vh]">
+        <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
+          
+          <div className="relative bg-neutral-800 rounded-2xl shadow-2xl w-full max-w-2xl h-[80vh]">
 
-      <button
-        onClick={closeModal}
-        className="absolute top-4 right-4 text-white text-2xl font-bold hover:text-red-400 transition z-10"
-      >
-        ✕
-      </button>
-      
-        <SnippetEditor
-          active={selectedSnippet}
-          onUpdate={handleUpdate}
-          onSave={handleSave}
-          onDelete={handleDelete}
-        />
-      
-    </div>
-  </div>
-)}
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 text-white text-2xl font-bold hover:text-red-400 transition z-10"
+            >
+              ✕
+            </button>
+              <SnippetEditor
+                active={selectedSnippet}
+                onUpdate={handleUpdate}
+                onSave={handleSave}
+                onDelete={handleDelete}
+              />
+            
+          </div>
+        </div>
+      )}
     </div>
   );
 };

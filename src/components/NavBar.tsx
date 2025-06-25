@@ -15,8 +15,8 @@ export const NavBar = () => {
   };
 
   return (
-    <nav className="bg-neutral-900 text-white w-full px-4 py-3 shadow-md">
-      <div className="max-w-full mx-auto flex justify-between items-center px-10">
+    <nav className="bg-neutral-900 text-white w-full py-3 shadow-md">
+      <div className="max-w-full mx-auto flex flex-wrap justify-between items-center px-4 sm:px-6 md:px-10">
         <Link to="/">
           <span className="text-xl font-bold text-violet-400">GitSnippetsHub</span>
         </Link>
