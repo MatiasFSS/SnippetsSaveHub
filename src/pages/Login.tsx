@@ -30,7 +30,7 @@ export const Login = () => {
   return (
     <>
      <div className="h-full bg-gradient-to-br from-neutral-800 to-neutral-900 px-4 flex flex-1 items-center justify-center">
-        <div className="w-full max-w-md bg-neutral-700 rounded-2xl shadow-xl p-6 sm:p-8 text-amber-50">
+        <div className="w-full max-w-md bg-neutral-700 rounded-2xl shadow-xl p-6 sm:p-8 text-amber-50 animate__animated animate__fadeIn">
           <h1 className="text-3xl font-bold text-center mb-2">Iniciar Sesión</h1>
           <p className="text-center text-sm font-light mb-6">Ingresa tus credenciales para acceder a tu cuenta.</p>
 

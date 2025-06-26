@@ -31,7 +31,7 @@ export const Dashboard = () => {
   return (
     <div className="h-full text-white p-3 bg-gradient-to-br from-neutral-800 to-neutral-900">
       <div className="flex flex-col lg:flex-row p-2">
-        <div className="w-full lg:w-1/2">
+        <div className="w-full lg:w-1/2 animate__animated animate__fadeInLeft">
           <div className="w-full p-4">
             <h1 className="text-xl my-2">¿Quieres crear un nuevo snippet?</h1>
             <button

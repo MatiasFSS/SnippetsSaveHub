@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { SiJavascript, SiPython, SiTypescript, SiRuby, SiPhp, SiHtml5, SiCss3 } from "react-icons/si";
+import 'animate.css';
 
 export const Landing = () => {
   return (
-    <div className="h-full bg-gradient-to-br from-neutral-800 to-neutral-900 px-6 py-12 flex flex-1 items-center justify-center">
+    <div className="h-full from-neutral-800 to-neutral-900 px-6 py-12 flex flex-1 items-center justify-center ">
       <div className="flex flex-col md:flex-row items-center gap-12 max-w-6xl w-full">
         {/* Sección izquierda */}
-        <div className="md:w-1/2 w-full">
+        <div className="md:w-1/2 w-full animate__animated animate__fadeInLeft">
           <div className="bg-neutral-700 rounded-2xl shadow-2xl p-8 text-amber-50">
             <h1 className="text-3xl sm:text-4xl font-bold mb-4 leading-tight">
               Bienvenido a la Gestión de Snippets
@@ -31,7 +32,7 @@ export const Landing = () => {
         </div>
 
         {/* Sección derecha */}
-        <div className="md:w-1/2 w-full text-amber-50">
+        <div className="md:w-1/2 w-full text-amber-50 animate__animated animate__fadeInDown">
           <h2 className="text-2xl sm:text-3xl font-bold mb-4">Soporte para múltiples tecnologías</h2>
           <p className="text-base font-light mb-4">
             Crea, organiza y visualiza snippets para lenguajes como{" "}
