@@ -13,7 +13,7 @@ export const Navigation = () => {
       <Routes>
         {/* Rutas públicas (solo si no está logueado) */}
         <Route element={<PublicRoute />}>
-          <Route path="/landing" element={<Landing />} />
+          <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
@@ -25,7 +25,7 @@ export const Navigation = () => {
         </Route>
 
         {/* Ruta por defecto */}
-        <Route path="/*" element={<Navigate to="/landing" replace />} />
+        <Route path="/*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
   );
