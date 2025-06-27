@@ -42,8 +42,8 @@ export const Register = () => {
 
   const result = await dispatch(startRegisterWithEmailPassword(formData));
   if(!result.ok){
-    toast("Error al crear la cuenta")
-    toast("Usuario ya existe")
+    toast.error("Error al crear la cuenta");
+    toast.error("Es posible que el usuario ya exista");
   }
 }
  
@@ -52,7 +52,7 @@ export const Register = () => {
      <div className="h-full bg-gradient-to-br from-neutral-800 to-neutral-900 px-4 flex flex-1 items-center justify-center">
         <div className="w-full max-w-md bg-neutral-700 rounded-2xl shadow-xl p-6 sm:p-8 text-amber-50 animate__animated animate__fadeIn">
           <h1 className="text-3xl font-bold text-center mb-2">Crea tu cuenta</h1>
-          <p className="text-center text-sm font-light mb-6">Completa el siguiente formulario para registrarte.</p>
+          <p className="text-center text-sm font-light mb-6">Completa el siguiente formulario para registrarte.</p> 
 
            <form className="flex flex-col gap-4" onSubmit={onSubmit}>
               <input
@@ -98,7 +98,7 @@ export const Register = () => {
           
               <p className="text-center text-sm mt-2">
                   ¿Ya tienes una cuenta?{" "}
-                  <a href="/login" className="text-violet-400 hover:underline">Inicia Sesión</a>
+                  <a href="/login" className="text-violet-400 hover:underline">Inicia sesión</a>
               </p>
           </form>
         </div>

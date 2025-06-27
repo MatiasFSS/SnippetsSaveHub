@@ -64,7 +64,7 @@ export const Dashboard = () => {
             </button>
 
             <h4 className="text-xl my-2 text-gray-500">
-              Haz click en el snippet para poder editar o eliminar
+              Haz clic en el snippet para poder editar o eliminar
             </h4>
           </div>
 
@@ -119,7 +119,7 @@ export const Dashboard = () => {
           </div>
         ) : (
           <div className="flex items-center justify-center flex-grow text-gray-500 text-xl">
-            Selecciona o crea un snippet
+            Selecciona un snippet existente o crea uno nuevo.
           </div>
         )}
       </div>

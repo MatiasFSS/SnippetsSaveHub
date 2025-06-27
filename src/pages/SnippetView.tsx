@@ -113,7 +113,7 @@ export const SnippetView = () => {
             </select>
 
             <h4 className="text-xl my-2 text-gray-500">
-              Haz click en el snippet para poder editar o eliminar
+              Haz clic en el snippet para poder editar o eliminar
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filtered.map((snip) => (

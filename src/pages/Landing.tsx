@@ -39,7 +39,7 @@ export const Landing = () => {
             <span className="font-medium text-violet-400">JavaScript</span>,{" "}
             <span className="font-medium text-violet-400">Python</span>,{" "}
             <span className="font-medium text-violet-400">TypeScript</span>,{" "}
-            <span className="font-medium text-violet-400">Java</span>, entre otros.
+            <span className="font-medium text-violet-400">Ruby</span>, entre otros.
           </p>
 
           <div className="flex flex-wrap gap-4 text-5xl">
