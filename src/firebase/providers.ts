@@ -1,25 +1,63 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { auth as FirebaseAuth } from "./firebase-config";
 import type { LoginFormData, RegisterFormData } from "../interface/interface";
 
-const googleProvider = new GoogleAuthProvider();
+const auth = getAuth();
 
 export const signInWithGoogle = async () => {
+ 
+  const provider = new GoogleAuthProvider();
+
   try {
-    const result = await signInWithPopup(FirebaseAuth, googleProvider);
-    const { displayName, email, uid } = result.user;
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
 
     return {
       ok: true,
-      displayName,
-      email,
-      uid
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
     };
-  } catch (error) {
-    if (error instanceof Error) {
-      return { ok: false, errorMessage: error.message };
+  } catch (error: any) {
+    
+    if (error.code === "auth/popup-closed-by-user") {
+      return {
+        ok: false,
+        errorMessage: "Inicio de sesión cancelado por el usuario",
+      };
     }
-    return { ok: false, errorMessage: "Error desconocido" };
+
+    // Otros errores
+    return {
+      ok: false,
+      errorMessage: error.message || "Error desconocido al iniciar sesión con Google",
+    };
+  }
+};
+
+
+export const signInWithGithub = async () => {
+  try {
+    const result = await signInWithPopup(auth, new GithubAuthProvider);
+
+    // Puedes obtener el token si quieres:
+    // const credential = GithubAuthProvider.credentialFromResult(result);
+    // const token = credential?.accessToken;
+
+    const user = result.user;
+
+    return {
+      ok: true,
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+    };
+  } catch (error: any) {
+    return {
+      ok: false,
+      errorMessage: error.message,
+    };
   }
 };
 

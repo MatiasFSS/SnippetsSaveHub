@@ -4,7 +4,7 @@ import type { RegisterFormData } from "../interface/interface";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../store/store";
 import { startRegisterWithEmailPassword } from "../store/auth/thunks";
-
+import { toast } from "react-toastify";
 
 export const Register = () => {
 
@@ -18,22 +18,34 @@ export const Register = () => {
     confirmPassword: ''
   });
 
-   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = async(e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    if (formData.password.length < 6) {
-      alert("La contraseña debe tener al menos 6 caracteres");
-      return;
-    }
+  const errores: string[] = [];
 
-    if (formData.password !== formData.confirmPassword) {
-      alert("Las contraseñas no coinciden");
-      return;
-    }
-    
-    console.log("Datos para registrar:", formData);
-    dispatch(startRegisterWithEmailPassword(formData));
-  };
+  if (!formData.username.trim() || !formData.email.trim() || !formData.password.trim() || !formData.confirmPassword.trim()) {
+    errores.push("Todos los campos son obligatorios");
+  }
+
+  if (formData.password && formData.password.length < 6) {
+    errores.push("La contraseña debe tener al menos 6 caracteres");
+  }
+
+  if (formData.password !== formData.confirmPassword) {
+    errores.push("Las contraseñas no coinciden");
+  }
+
+  if (errores.length > 0) {
+    errores.forEach(err => toast.error(err));
+    return;
+  }
+
+  const result = await dispatch(startRegisterWithEmailPassword(formData));
+  if(!result.ok){
+    toast("Error al crear la cuenta")
+    toast("Usuario ya existe")
+  }
+}
  
   return (
     <>
@@ -49,6 +61,7 @@ export const Register = () => {
                 className="bg-amber-50 text-black px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500 transition"
                 onChange={onChange}
                 name="username"
+                value={formData.username}
               />
               <input
                 type="email"
@@ -56,6 +69,7 @@ export const Register = () => {
                 className="bg-amber-50 text-black px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500 transition"
                 onChange={onChange}
                 name="email"
+                value={formData.email}
               />
 
               <input
@@ -64,6 +78,7 @@ export const Register = () => {
                 className="bg-amber-50 text-black px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500 transition"
                 onChange={onChange}
                 name="password"
+                value={formData.password}
               />
                 <input
                 type="password"
@@ -71,6 +86,7 @@ export const Register = () => {
                 className="bg-amber-50 text-black px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500 transition"
                 onChange={onChange}
                 name="confirmPassword"
+                value={formData.confirmPassword}
               />
               <button
                 type="submit"

@@ -3,7 +3,8 @@ import { useForm } from "../hooks/useForm"
 import type { LoginFormData } from "../interface/interface"
 import { useDispatch } from "react-redux"
 import type { AppDispatch } from "../store/store";
-import { startLoginWithEmailPassword, startLoginWithGoogle } from "../store/auth/thunks";
+import { startLoginWithEmailPassword, startLoginWithGithub, startLoginWithGoogle } from "../store/auth/thunks";
+import { toast } from "react-toastify";
 
 
 
@@ -18,13 +19,43 @@ export const Login = () => {
         password: '',
     })
 
-    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        dispatch(startLoginWithEmailPassword(formData))
+    const onSubmit = async(event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+
+      const errors: string[] = [];
+
+      if (!formData.email.trim() || !formData.password.trim()) {
+        errors.push("Todos los campos son obligatorios");
+      }
+
+      if (errors.length > 0) {
+        errors.forEach((err) => toast.error(err));
+        return;
+      }
+
+      const result = await dispatch(startLoginWithEmailPassword(formData));
+
+      if (!result.ok) {
+        toast.error("Error al iniciar sesión");
+        toast.error("Contraseña incorrecta / usuario no existe");
+      }
+        
     }
 
-    const onGoogleSignIn = () => {
-      dispatch(startLoginWithGoogle());
+    const onGoogleSignIn = async() => {
+    
+      const result = await dispatch(startLoginWithGoogle());
+
+      if(!result.ok){
+        toast.error("Error al iniciar sesión con google")
+      }
+    };
+
+    const onGithubSignIn = async () => {
+      const result = await dispatch(startLoginWithGithub());
+      if (!result.ok) {
+        toast.error("Error al iniciar sesión con GitHub");
+      }
     };
     
   return (
@@ -41,6 +72,7 @@ export const Login = () => {
               className="bg-amber-50 text-black px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500 transition"
               onChange={onChange}
               name="email"
+              value={formData.email}
              
             />
             <input
@@ -49,6 +81,7 @@ export const Login = () => {
               className="bg-amber-50 text-black px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500 transition"
               onChange={onChange}
               name="password"
+              value={formData.password}
             />
 
             <button
@@ -72,7 +105,7 @@ export const Login = () => {
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 type="button"
-                onClick={() => dispatch(onGoogleSignIn)}
+                onClick={onGoogleSignIn}
                 className="flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg border border-white/20 hover:bg-white/10 transition text-white"
               >
                 <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
@@ -81,7 +114,7 @@ export const Login = () => {
 
               <button
                 type="button"
-                onClick={() => console.log("Iniciar con GitHub")}
+                onClick={onGithubSignIn}
                 className="flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg border border-white/20 hover:bg-white/10 transition text-white"
               >
                 <img src="https://www.svgrepo.com/show/512317/github-142.svg" alt="GitHub" className="w-5 h-5" />

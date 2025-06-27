@@ -1,4 +1,4 @@
-import { loginWithEmailPassword, signInWithGoogle, registerUserWithEmailPassword, logoutFirebase } from "../../firebase/providers";
+import { loginWithEmailPassword, signInWithGoogle, registerUserWithEmailPassword, logoutFirebase, signInWithGithub } from "../../firebase/providers";
 import type { LoginFormData, RegisterFormData } from "../../interface/interface";
 import { clearSnippetAuth } from "../snippets/snippetsSlice";
 import type { AppDispatch } from "../store";
@@ -6,40 +6,67 @@ import { checkingCredentials, login, logout } from "./authSlice";
 
 export const startLoginWithEmailPassword = (credentials: LoginFormData) => {
   return async (dispatch: AppDispatch) => {
-    dispatch(checkingCredentials()); // Estado: "checking"
+     dispatch(checkingCredentials());
 
-    const result = await loginWithEmailPassword(credentials); // Llama Firebase
+    const result = await loginWithEmailPassword(credentials);
 
     if (!result.ok) {
-      return dispatch(logout({ errorMessage: result.errorMessage }));
+      dispatch(logout({ errorMessage: result.errorMessage }));
+      return result;
     }
 
     dispatch(login({
-        uid: result.uid!,
-        email: result.email!,
-        displayName: result.displayName || ''
-    })); // Login exitoso
+      uid: result.uid!,
+      email: result.email!,
+      displayName: result.displayName || ''
+    }));
+
+    return result;
   };
 };
 
 export const startLoginWithGoogle = () => {
 
     return async (dispatch: AppDispatch) => {
+        dispatch(checkingCredentials());
 
-        dispatch(checkingCredentials()); // Estado: "checking"
-        const result = await signInWithGoogle()
+        const result = await signInWithGoogle();
 
         if (!result.ok) {
-            return dispatch(logout({ errorMessage: result.errorMessage }));
+        dispatch(logout({ errorMessage: result.errorMessage }));
+        return result;
         }
 
         dispatch(login({
-             uid: result.uid!,
-            email: result.email!,
-            displayName: result.displayName || ''
-        })); // Login exitoso
-    }
+        uid: result.uid!,
+        email: result.email!,
+        displayName: result.displayName || '',
+        }));
+
+        return result;
+  };
 }
+
+export const startLoginWithGithub = () => {
+  return async (dispatch: AppDispatch) => {
+    dispatch(checkingCredentials());
+
+    const result = await signInWithGithub();
+
+    if (!result.ok) {
+      dispatch(logout({ errorMessage: result.errorMessage }));
+      return result;
+    }
+
+    dispatch(login({
+      uid: result.uid!,
+      email: result.email!,
+      displayName: result.displayName || '',
+    }));
+
+    return result;
+  };
+};
 
 export const startRegisterWithEmailPassword = (data: RegisterFormData)=> {
     return async (dispatch: AppDispatch) => {
@@ -48,7 +75,8 @@ export const startRegisterWithEmailPassword = (data: RegisterFormData)=> {
         const result = await registerUserWithEmailPassword(data); // Llama Firebase
 
         if (!result.ok) {
-            return dispatch(logout({ errorMessage: result.errorMessage }));
+            dispatch(logout({ errorMessage: result.errorMessage }));
+            return result
         }
 
         dispatch(login({
@@ -56,6 +84,8 @@ export const startRegisterWithEmailPassword = (data: RegisterFormData)=> {
             email: result.email!,
             displayName: result.displayName || ''
         }));
+
+        return result
     }
 }
 
