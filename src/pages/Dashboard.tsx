@@ -7,6 +7,7 @@ import type{ RootState, AppDispatch } from "../store/store";
 import type { Data } from "../interface/interface";
 import { SnippetEditor } from "../components/SnippetEditor";
 import { useNavigate } from "react-router-dom";
+import { FiEdit } from "react-icons/fi";
 
 export const Dashboard = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -29,11 +30,11 @@ export const Dashboard = () => {
     .slice(0, 8);
 
   return (
-    <div className="h-full text-white p-3 bg-gradient-to-br from-neutral-800 to-neutral-900">
+    <div className="h-full text-white p-6 bg-gradient-to-br from-neutral-800 to-neutral-900">
       <div className="flex flex-col lg:flex-row p-2">
         <div className="w-full lg:w-1/2 animate__animated animate__fadeInLeft">
           <div className="w-full p-4">
-            <h1 className="text-xl my-2">¿Quieres crear un nuevo snippet?</h1>
+            <h1 className="text-xl my-2 flex items-center gap-2"><FiEdit />¿Quieres crear un nuevo snippet?</h1>
             <button
               onClick={handleNew}
               className="bg-violet-500 hover:bg-violet-600 active:bg-violet-700 text-white py-2 px-2 rounded-lg font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"

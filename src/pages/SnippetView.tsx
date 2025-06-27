@@ -5,6 +5,7 @@ import { SnippetEditor } from "../components/SnippetEditor";
 import { startLoadingSnippet, startSaveSnippet, startDeletingSnippet } from "../store/snippets/thunks";
 import { activeSnippet } from "../store/snippets/snippetsSlice";
 import type { Data } from "../interface/interface";
+import { FiBookOpen } from "react-icons/fi";
 
 const technologies = [
   "Todos",
@@ -71,36 +72,50 @@ export const SnippetView = () => {
 
   return (
     <div className="h-full p-6 text-white bg-gradient-to-br from-neutral-800 to-neutral-900">
-      <h1 className="text-3xl font-bold mb-6 text-amber-50">
-        Bienvenido a tu biblioteca de Snippets
-      </h1>
+      
+      <div className="flex flex-col lg:flex-row p-2">
+        
+        <div className="w-full animate__animated animate__fadeInLeft">
+        <div className="w-full p-4">
+          <h1 className="text-xl my-2 text-amber-50 flex items-center gap-2">
+            <FiBookOpen />
+            Bienvenido a tu biblioteca de Snippets
+          </h1>
 
-      <select
-        className="mb-6 p-2  bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-violet-500 rounded text-white"
-        value={selectedTech}
-        onChange={(e) => setSelectedTech(e.target.value)}
-      >
-        {technologies.map((tech) => (
-          <option key={tech} value={tech}>{tech}</option>
-        ))}
-      </select>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 animate__animated animate__fadeInLeft">
-        {filtered.map((snip) => (
-          <div
-            key={snip.id}
-            className="bg-neutral-700 p-6 rounded-lg hover:bg-violet-700 transition cursor-pointer"
-            onClick={() => openModal(snip)}
+          <select
+            className="p-3  bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-violet-500 rounded text-white"
+            value={selectedTech}
+            onChange={(e) => setSelectedTech(e.target.value)}
           >
-            <h2 className="text-xl font-semibold">{snip.title || "(Sin título)"}</h2>
-            <p className="text-sm text-gray-400">{snip.tech}</p>
-            <p className="text-xs text-gray-500">
-              {new Date(snip.date).toLocaleDateString()}
-            </p>
-            <p className="text-sm mt-2 text-gray-300 truncate">{snip.desc}</p>
+            {technologies.map((tech) => (
+              <option key={tech} value={tech}>{tech}</option>
+            ))}
+          </select>
+
+          <h4 className="text-xl my-2 text-gray-500">
+                  Haz click en el snippet para poder editar o eliminar
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filtered.map((snip) => (
+              <div
+                key={snip.id}
+                className="bg-neutral-700 p-6 rounded-lg hover:bg-violet-700 transition cursor-pointer"
+                onClick={() => openModal(snip)}
+              >
+                <h2 className="text-xl font-semibold">{snip.title || "(Sin título)"}</h2>
+                <p className="text-sm text-gray-400">{snip.tech}</p>
+                <p className="text-xs text-gray-500">
+                  {new Date(snip.date).toLocaleDateString()}
+                </p>
+                <p className="text-sm mt-2 text-gray-300 truncate">{snip.desc}</p>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
+      </div>
+      
+      
 
       {isModalOpen && selectedSnippet && (
         <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">

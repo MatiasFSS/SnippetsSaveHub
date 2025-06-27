@@ -18,7 +18,7 @@ export const NavBar = () => {
     <nav className="bg-neutral-900 text-white w-full py-3 shadow-md">
       <div className="max-w-full mx-auto flex flex-wrap justify-between items-center px-4 sm:px-6 md:px-10">
         <Link to="/">
-          <span className="text-xl font-bold text-violet-400">SnippetsSaveHub</span>
+          <span className="text-xl font-bold text-violet-400">{"<SnippetsSaveHub />"}</span>
         </Link>
 
         <div className="flex items-center gap-4">
@@ -36,7 +36,7 @@ export const NavBar = () => {
           )}
 
           <a
-            href="https://github.com/tu-usuario/tu-repo"
+            href="https://github.com/MatiasFSS/SnippetsSaveHub"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-violet-400 transition"

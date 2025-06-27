@@ -1,54 +1,51 @@
-# React + TypeScript + Vite
+# 🚀 GitSnippetsHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**GitSnippetsHub** es una aplicación web construida con React + TypeScript que permite a los desarrolladores gestionar y organizar fragmentos de código (snippets) por tecnología, con autenticación y almacenamiento en Firebase.
 
-Currently, two official plugins are available:
+## 🧩 Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ✅ Crear, editar y eliminar snippets de código
+- ✅ Agrupar snippets por tecnología
+- ✅ Autenticación con Firebase (Google, GitHub, etc.)
+- ✅ Editor de código con [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+- ✅ Notificaciones personalizadas con [React Toastify](https://fkhadra.github.io/react-toastify/introduction)
+- ✅ Estilos con TailwindCSS + Animate.css
+- ✅ Integración con Redux Toolkit para el manejo de estado
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tecnologías utilizadas
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+| Herramienta | Descripción |
+|-------------|-------------|
+| **React 19** | UI moderna y reactiva |
+| **TypeScript** | Tipado fuerte para mayor escalabilidad |
+| **Tailwind CSS v4** | Framework de estilos utility-first |
+| **Firebase v11** | Autenticación y base de datos en tiempo real |
+| **Redux Toolkit** | Manejo global del estado |
+| **Monaco Editor** | Editor de código como el de VS Code |
+| **React Toastify** | Notificaciones elegantes y configurables |
+| **React Router DOM v7** | Navegación por rutas declarativas |
+| **FontAwesome / React Icons** | Iconografía moderna |
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🌐 Prueba la aplicación
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Accede directamente desde el navegador:
+
+👉 [https://snippets-save-hub.vercel.app/](https://snippets-save-hub.vercel.app/)
+
+---
+
+## 💡 Futuras mejoras
+
+- 📁 Sistema de carpetas para organizar snippets
+- 🔍 Filtro y buscador inteligente
+- 📤 Exportar/importar snippets
+
+---
+
+## 🧑‍💻 Autor
+
+Desarrollado por [Matías Sánchez](https://github.com/tu-usuario)

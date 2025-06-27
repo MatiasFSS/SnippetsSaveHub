@@ -40,10 +40,6 @@ export const signInWithGithub = async () => {
   try {
     const result = await signInWithPopup(auth, new GithubAuthProvider);
 
-    // Puedes obtener el token si quieres:
-    // const credential = GithubAuthProvider.credentialFromResult(result);
-    // const token = credential?.accessToken;
-
     const user = result.user;
 
     return {
