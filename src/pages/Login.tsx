@@ -36,8 +36,12 @@ export const Login = () => {
       const result = await dispatch(startLoginWithEmailPassword(formData));
 
       if (!result.ok) {
-        toast.error("Error al iniciar sesión");
-        toast.error("Contraseña incorrecta / usuario no existe");
+        if (result.errorMessage === "Correo no verificado") {
+          toast.error("Debes verificar tu correo antes de iniciar sesión. Revisa tu bandeja de entrada.");
+        } else {
+          toast.error("Error al iniciar sesión");
+          toast.error("Contraseña incorrecta / usuario no existe");
+        }
       }
         
     }
